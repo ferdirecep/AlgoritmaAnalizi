@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            //dizi elemanlarının min ve max olabilecek değerleri
+            int Min = 0;
+            int Max = 100;
+
+            // arr dizisinin eleman sayısı
+            int[] arr = new int[10];
+
+            //arr dizisinin içine random değer ekleme
+            Random randNum = new Random();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = randNum.Next(Min, Max);
+            }
+
+            //oluşan diziyi ekrana yazdırma
+            for (int i = 0; i < arr.Length; i++)
+                Console.Write(arr[i] + " ");
+            Console.WriteLine();
+            selectsort(arr, arr.Length); //sorting process using selection sort
+
+            for (int i = 0; i < arr.Length; i++)
+                Console.Write(arr[i] + "\t"); //after sorting
+            Console.ReadLine();
+
+        }
+
+        ///selection sort
+        static void selectsort(int[] dataset, int n)
+        {
+            int i, j;
+            int swap = 0;
+            int step = 0;
+            for (i = 0; i < n; i++)
+            {
+                int min = i;
+                for (j = i + 1; j < n; j++)
+                {
+                    if (dataset[j] < dataset[min])
+                    {
+                        min = j; //find min value
+                        swap += 1;
+                        step += 1;
+                        //oluşan diziyi ekrana yazdırma
+                        Console.WriteLine("Degisiklik var");
+                        Console.WriteLine("swap num= " + swap);
+                        Console.WriteLine("step num= " + step);
+                        Console.WriteLine("Degisiklik "+dataset[min]);
+                    }
+                    else
+                    {
+                        step += 1;
+                        Console.WriteLine("Degisiklik yok");
+                        Console.WriteLine("swap num= " + swap);
+                        Console.WriteLine("step num= " + step);
+                    }
+                }
+                //then swap it with the beginning item of the unsorted list
+                int temp = dataset[i];
+                dataset[i] = dataset[min];
+                dataset[min] = temp;
+            }
+
+            Console.WriteLine("swap num= " + swap);
+            Console.WriteLine("step num= " + step);
+        }
+
+
+
+    }
+}
