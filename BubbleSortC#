@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace bubbleSortProject
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //dizi elemanlarının min ve max olabilecek değerleri
+            int Min = 0;
+            int Max = 100;
+
+            // arr dizisinin eleman sayısı
+            int[] arr = new int[10];
+
+            //arr dizisinin içine random değer ekleme
+            Random randNum = new Random();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = randNum.Next(Min, Max);
+            }
+
+            //oluşan diziyi ekrana yazdırma
+            for (int i = 0; i < arr.Length; i++)
+                Console.Write(arr[i] + " ");
+            Console.WriteLine();
+            
+            int temp = 0;
+            int swap = 0;
+            int step = 0;
+            
+            int gecici;
+            for (int i = 1; i < arr.Length; i++)
+            {
+                for (int j = 0; j < arr.Length - i; j++)
+                {
+                    //eğer ilk değer karşılaştırılan değerden büyükse döngüye gir yer değiştir!
+                    if (arr[j] > arr[j + 1])
+                    {
+                        gecici = arr[j + 1];
+                        arr[j + 1] = arr[j];
+                        arr[j] = gecici;
+                        swap += 1;
+                        step += 1;
+                        for (int x = 0; x < arr.Length; x++)
+                            Console.Write(arr[x] + " ");
+                        Console.WriteLine("yer değiştirme var");
+                        Console.WriteLine("Swap Num. = " + swap);
+                        Console.WriteLine("Step Num. = " + step);
+                    }
+                    else {
+                        //yer değiştirme yok ise karşılaştırma sayısını arttır swap sayısını aynı bırak
+                        step += 1;
+                        for (int x = 0; x < arr.Length; x++)
+                            Console.Write(arr[x] + " ");
+                        Console.WriteLine("yer değiştirme yok");
+                        Console.WriteLine("Swap Num. = " + swap);
+                        Console.WriteLine("Step Num. = " + step);
+                    }
+                }
+            }
+
+            //dizinin son halini swap ve step sayısı ile birlikte ekrana yaz
+            for (int i = 0; i < arr.Length; i++)
+                Console.Write(arr[i] + " ");
+            Console.WriteLine();
+            Console.WriteLine("Swap Num. = "+swap);
+            Console.WriteLine("Step Num. = " + step);
+            Console.ReadKey();
+        }
+    }
+}
