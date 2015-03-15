@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            //yazıların rengini kırmızı yap
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            //dizi elemanlarının min ve max olabilecek değerleri
+            int Min = 0;
+            int Max = 1000;
+
+            //kullanıcıdan dizinin eleman sayısı istenir
+            Console.Write("Dizi Boyutunu Giriniz: ");
+            string f = Console.ReadLine();
+            int x = int.Parse(f);
+
+            // arr dizisinin eleman sayısı kullanıcıdan alınan değer atanır
+            int[] arr = new int[x];
+
+            //arr dizisinin içine random değer ekleme
+            Random randNum = new Random();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = randNum.Next(Min, Max);
+            }
+
+            //oluşan diziyi ekrana yazdırma
+            Console.Write("Oluşan "+x+" elemanlı dizi: ");
+            for (int i = 0; i < arr.Length; i++)
+                Console.Write(arr[i] + " ");
+            
+            Console.WriteLine();
+            selectsort(arr, arr.Length); 
+            
+            //selectsort kullanarak dizi sıralanır ve sıralanmış hali yazdırılır
+
+            Console.Write("Dizinin sıralanmış hali: ");
+            for (int i = 0; i < arr.Length; i++)
+                Console.Write(arr[i] + " ");
+            Console.WriteLine();
+
+            // Diziyi Tersine çevirme.
+            Array.Reverse(arr);
+
+            //oluşan diziyi ekrana yazdırma
+            Console.Write("Dizinin Büyükten küçüğe sıralanmaş hali: ");
+            for (int i = 0; i < arr.Length; i++)
+                Console.Write(arr[i] + " ");
+            Console.WriteLine();
+
+            Console.Write("Kaçıncı Büyük Elemanı bulmak istiyorsunuz: ");
+            string aranan = Console.ReadLine();
+            int aranansayi = int.Parse(aranan);
+
+            //alınan k ıncı eleman dizi boyutundan büyükmü küçükmü kontrolü büyükse info döndür değilse sayıyı
+            if (aranansayi > arr.Length)
+            {
+                Console.Write("Dizi boyutu " + x + " elemandan oluşmaktadır! İstediğiniz değer dizi boyutunda büyük.");
+            }
+            else { Console.Write("Dizinin "+aranansayi+" . Büyük Elemanı: "+ arr[aranansayi-1]); }
+            Console.ReadLine();
+        }
+
+        ///selection sort
+        static void selectsort(int[] dataset, int n)
+        {
+            int i, j;
+            for (i = 0; i < n; i++)
+            {
+                int min = i;
+                for (j = i + 1; j < n; j++)
+                {
+                    if (dataset[j] < dataset[min])
+                    {
+                        min = j;
+                    }
+                }
+                //then swap it with the beginning item of the unsorted list
+                int temp = dataset[i];
+                dataset[i] = dataset[min];
+                dataset[min] = temp;
+            }
+
+        }
+
+
+
+    }
+}
