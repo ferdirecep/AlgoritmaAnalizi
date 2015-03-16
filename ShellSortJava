@@ -1,0 +1,52 @@
+import java.util.Random;
+
+
+public class MyInsertionSort {
+ 
+    public static void main(String[] args) {
+    	int[] input = new int[100];
+        
+        Random rand = new Random();
+        for (int i = 0; i < input.length; i++) {
+          int n = rand.nextInt(100);
+          input[i] = n;
+        }
+        
+        printNumbers(input);
+        shellSort(input);
+    }
+     
+    private static void printNumbers(int[] input) {
+         
+        for (int i = 0; i < input.length; i++) {
+            System.out.print(input[i] + ", ");
+        }
+        System.out.println("\n");
+    }
+ 
+	public static void shellSort(int[] data){
+		int lenD = data.length;
+		int swap=0;
+		int step=0;
+		int inc = lenD/2;
+		while(inc>0){
+			for(int i=inc;i<lenD;i++){
+				int tmp = data[i];
+				int j = i;
+				if(data[j-inc]>tmp){
+					while(j>=inc && data[j-inc]>tmp){
+						data[j] = data[j-inc];
+						j = j-inc;
+						step+=1;
+						swap+=1;
+						System.out.println("Swap: "+swap);
+			            System.out.println("Step: "+step);
+						printNumbers(data);
+					}
+				}else{step+=1;}
+				data[j] = tmp;
+			}
+			inc = (inc /2);
+		}
+	}
+}
