@@ -1,0 +1,69 @@
+public class HızlıSıralama {
+int[] arr = { 2, 17, -4, 42, 9, 26, 11, 3, 5, 28 };
+void quickSort(int[] a, int altindis, int üstindis) {
+// altindis o adımda sıralanan altdizinin ek küçük indisidir
+// üstindis o adımda sıralanan altdizinin ek büyük indisidir
+int i = altindis, j = üstindis, h;
+// x terimi, mukayesenin yapılacağı mihenk'dir (pivot)
+int x = a[(altindis + üstindis) / 2];
+// Takas eylemiyle diziyi ayrıştırma
+do {
+while (a[i] < x)
+i++;
+while (a[j] > x)
+j--;
+if (i <= j) {
+h = a[i];
+a[i] = a[j];
+a[j] = h;
+i++;
+j--;
+}
+} while (i <= j);
+// yinelge (recursion)
+if (altindis < j)
+quickSort(a, altindis, j);
+if (i < üstindis)
+quickSort(a, i, üstindis);
+}
+public static void main(String[] args) {
+HızlıSıralama qs = new HızlıSıralama();
+System.out.println("Sıralamadan önce: ");
+System.out.println(Arrays.toString(qs.arr));
+qs.quickSort(qs.arr, 0, 9);
+System.out.println("Sıralamadan sonra:");
+System.out.println(Arrays.toString(qs.arr));
+}
+}Hızlı sıralamanın algoritma karmaşıklığına bakıldığında O(nlogn) olarak bulunur çünkü üzerinde çalışılan dizi her
+adımda en fazla 2ye bölünmüştür  böylece sonuç dizisi olan 2şer elemanlı dizilere log2n adımda ulaşılabilir.
+Daha sonra her n eleman için sıralama yapıldığı ve her n eleman üzerinden geçildiği için bu değer çarpan olarak 
+gelmekte ve sonuç nlog2n olarak bulunmaktadır.
+
+bolmek islemine bakarsak ;
+a[0] a[1] a[2] a[3] a[4] a[5] a[6] a[7] a[8] a[9]
+2      17  -4   42    9   26   11    3    5   28   ----9 arıyoruz,dizini ortası bulunduktan iki farklı alan 
+üzerindenden sıralama yapılır
+
+Sol alt dizinin ayrıştırılması:
+{2, 5, -4, 3} a[1] = mihenk = 5, indis = (0+3)/2 = 1
+{2, 3, -4, 5} takas: 3 ile 5
+{2, -4, 3, 5} takas: -4 ile 3
+{2, -4, 3} {5} alt dizilere ayrışma
+{-4, 2, 3} {5} takas: -4 ile 2
+{-4}, {2}, {3}, {5} tek öğeli dizilere indirgenmiş
+{-4, 2, 3, 5} Sıralanmış sol alt dizi
+Sağ alt dizinin ayrıştırılması:
+{26, 11, 42, 17, 28} a[7] = mihenk = 42, indis = (6+9)/2 = 7
+{26, 11, 28, 17, 42} takas: 42 ile 28
+{26, 11, 28, 17} {42} ayrıştır
+{11, 26, 42, 17, 28} takas: 26 ile 11
+{11} {26, 28, 17} {42} ayrıştır
+{11} {26, 17, 28} {42} takas: 28 ile 17
+{11} {26, 17} {28} {42} ayrıştır
+{11} {17, 26} {28} {42} takas: 17 ile 26
+{11} {17} {26} {28} {42} ayrıştır
+{11, 17, 26, 28, 42} Sıralanmış sağ alt dizi
+
+a[0] a[1] a[2] a[3] a[4] a[5] a[6] a[7] a[8] a[9]
+-4    2    3    5    9    11  17    26   28   42 --sıralnamıs hali ..
+
