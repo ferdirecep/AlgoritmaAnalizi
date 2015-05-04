@@ -1,0 +1,38 @@
+PassingGrade <- c('A','A-','B','+B','B-','C+','C','C+','-D','+D','D','-S','+K','-K','K','+O','+P','+L','-L','L')
+GradePoint <- c(4.0,3.67,3.33,3.0,2.67,2.33,2.0,1.67,1.33,1.670,1.1,6.7,2.5,1.2,8.89,0.8,0.56,0.75,1.6,2.3)
+
+data <-data.frame(PassingGrade,GradePoint)
+str(data)
+ summary(data$GradePoint) or summary(data$PassingGrade)
+ 
+ > x= 1:20
+> y=data$GradePoint
+plot(lm(y~x))
+abline(lm(y~x))
+
+Call:
+lm(formula = data$GradePoint ~ data$PassingGrade)
+//
+Coefficients:
+        (Intercept)  data$PassingGrade-K  data$PassingGrade-L  data$PassingGrade-S  data$PassingGrade+B  data$PassingGrade+D  data$PassingGrade+K  
+               1.33                -0.13                 0.27                 5.37                 1.67                 0.34                 1.17  
+data$PassingGrade+L  data$PassingGrade+O  data$PassingGrade+P   data$PassingGradeA  data$PassingGradeA-   data$PassingGradeB  data$PassingGradeB-  
+              -0.58                -0.53                -0.77                 2.67                 2.34                 2.00                 1.34  
+ data$PassingGradeC  data$PassingGradeC+   data$PassingGradeD   data$PassingGradeK   data$PassingGradeL  
+               0.67                 0.67                -0.23                 7.56                 0.97  
+
+predict(lm(data$GradePoint~data$PassingGrade),newData=new.GradePoint,se.fit=TRUE)
+$fit
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20 
+4.00 3.67 3.33 3.00 2.67 2.00 2.00 2.00 1.33 1.67 1.10 6.70 2.50 1.20 8.89 0.80 0.56 0.75 1.60 2.30 
+
+$se.fit
+ [1] 0.4666905 0.4666905 0.4666905 0.4666905 0.4666905 0.3300000 0.4666905 0.3300000 0.4666905 0.4666905 0.4666905 0.4666905 0.4666905 0.4666905 0.4666905 0.4666905
+[17] 0.4666905 0.4666905 0.4666905 0.4666905
+
+$df
+[1] 1
+
+$residual.scale
+[1] 0.4666905
+
