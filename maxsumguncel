@@ -1,0 +1,39 @@
+public final class MaxSumTest
+{
+    static private int seqStart = 0; dizi bası
+    static private int seqEnd = -1; dizi sonu
+
+ public static int maxSubSum( int [ ] a )
+    {
+        int maxSum = 0;
+
+        for( int i = 0; i < a.length; i++ )
+        {
+            int thisSum = 0;
+            for( int j = i; j < a.length; j++ )
+            {
+                thisSum += a[ j ];
+
+                if( thisSum > maxSum )
+                {
+                    maxSum = thisSum;
+                    seqStart = i;
+                    seqEnd   = j;
+                }
+            }
+        }
+
+        return maxSum;
+    }
+     public static void main( String [ ] args )
+    {
+        int a[ ] = { 4, -3, 5, -2, -1, 2, 6, -2 };
+        int maxSum;
+
+     
+        maxSum = maxSubSum( a );
+        System.out.println( "Max Toplam " + maxSum + "; Devam Et"
+                       + " BaÅŸlangÄ±c " + seqStart + " Devam " + seqEnd );
+        
+    }
+}
