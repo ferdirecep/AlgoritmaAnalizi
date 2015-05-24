@@ -1,0 +1,38 @@
+Enter file contents here static  int linearsearch(int[] a, int n, int target)
+15
+        {
+16
+            if (n <= 0)
+17
+                return -1;
+18
+            if (a[n - 1] == target)
+19
+                return n - 1;
+20
+            else
+21
+                return linearsearch(int []a, int n-1,int target);
+22
+        }
+lineer search sıralanmıs bir dizide bastan sonra arama işlemi yapmak icin  ideal binary searche baktıgımız zaman 
+Procedure BinarySearch(List, First, Last, ItemToFind)
+   itemfound ← false
+   searchfailed ← false
+   Repeat
+      midpoint ← (First + Last) DIV 2
+      IF List[midpoint] = ItemToFind
+      Then itemfound ← true
+      Else
+         IF First >= Last
+         Then searchfailed ← true
+         Else
+            IF List[midpoint] > ItemToFind
+            Then Last ← midpoint -1
+            Else First ← midpoint + 1
+            End If
+         End If
+      End If
+   Until itemfound OR searchfailed
+End Procedure
+lineer soearche gore daha verimli olur sebebi ,tüm listeki elemanlarla karsılastırma yapmak zorunda kalmaz 
